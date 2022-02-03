@@ -1,0 +1,9 @@
+FROM golang:1.16
+WORKDIR /go/bin
+COPY . ./
+RUN go install .
+
+FROM ubuntu:latest  
+WORKDIR /root/
+COPY --from=0 /go/bin ./
+CMD ["./myapp"]
